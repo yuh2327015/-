@@ -29,8 +29,8 @@ int main() {
 
     int enhancementLevel = 0;
 
-    int successChance[] = { 95, 90, 85, 80, 75, 70, 60, 50, 30, 1 };
-    int destructionChance[] = { 0, 0, 0, 0, 0, 1, 3, 5, 20, 30 };
+    int successChance[] = { 95, 85, 75, 60, 50, 35, 20, 10, 5, 2 };
+    int destructionChance[] = { 0, 0, 0, 0, 1, 5, 10, 15, 20, 30 };
 
     int choice;
     bool once; // 버퍼를 첫 1회 및 장비 파괴 후 다시 시작할때만 지우기 위해 만든 변수
