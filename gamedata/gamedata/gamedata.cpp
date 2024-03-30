@@ -1,12 +1,9 @@
 ﻿#include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <Windows.h>
 
 #define MAX_ENHANCEMENT_LEVEL 10
-
-void showLoadingScreen() {
-    std::cout << "강화 중입니다...\n";
-}
 
 void showMainMenu() {
     std::cout << "------------\n";
@@ -36,8 +33,11 @@ int main() {
     int destructionChance[] = { 0, 0, 0, 0, 0, 1, 3, 5, 20, 30 };
 
     int choice;
+    bool once; // 버퍼를 첫 1회 및 장비 파괴 후 다시 시작할때만 지우기 위해 만든 변수
+    
     while (true) {
         showMainMenu();
+        once = true;
         std::cout << "선택하세요: ";
         std::cin >> choice;
 
@@ -52,10 +52,14 @@ int main() {
                 std::cout << "강화하시겠습니까? (Enter 키로 강화):\n";
                 std::cout << "-----------------------------------------\n";
 
-                std::cin.ignore(); // 버퍼 비우기
+                if (once)
+                {
+                    std::cin.ignore(); // 버퍼 비우기
+                    once = false;
+                }
                 std::cin.get();    // 엔터키 입력 대기
-
-                showLoadingScreen();
+                std::cout << "강화 중입니다...\n";
+                Sleep(1000);
 
                 int result = std::rand() % 100;
 
