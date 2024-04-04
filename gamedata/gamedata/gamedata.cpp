@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
 #include <Windows.h>
@@ -27,17 +28,37 @@ void showGameDescription() {
     std::cout << "-------------------------------------------------------------------------------\n";
 }
 
+void saveGameData(int enhancements, int successes, int failures, int maxEnhancements) {
+    std::ofstream file("game_data.csv", std::ios::out | std::ios::app);
+    if (file.is_open()) {
+        // 파일이 비어있는 경우에만 헤더를 추가
+        if (file.tellp() == 0) {
+            file << "강화 횟수,성공 횟수,실패 횟수,최대 강화 횟수\n";
+        }
+        // 각 데이터를 쉼표로 구분하여 한 행에 저장
+        file << enhancements << "," << successes << "," << failures << "\n";
+        file.close();
+    }
+    else {
+        std::cerr << "Unable to open file for saving game data.\n";
+    }
+}
+
+
 int main() {
     std::srand(std::time(nullptr));
 
     int enhancementLevel = 0;
+    int successes = 0;
+    int failures = 0;
+    int maxEnhancements = 0;
 
     int successChance[] = { 95, 85, 75, 60, 50, 35, 20, 10, 5, 2 };
     int destructionChance[] = { 0, 0, 0, 0, 1, 5, 10, 15, 20, 30 };
 
     int choice;
     bool once; // 버퍼를 첫 1회 및 장비 파괴 후 다시 시작할때만 지우기 위해 만든 변수
-    
+
     while (true) {
         showMainMenu();
         once = true;
@@ -69,29 +90,35 @@ int main() {
                 if (enhancementLevel < 5) {
                     if (result < successChance[enhancementLevel]) {
                         enhancementLevel++;
+                        successes++;
                         std::cout << "강화 성공!\n";
                     }
                     else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
                         enhancementLevel = 0;
+                        failures++;
                         std::cout << "장비가 파괴되었습니다!\n";
                         break;
                     }
                     else {
+                        failures++;
                         std::cout << "강화 실패!\n";
                     }
                 }
                 else {
                     if (result < successChance[enhancementLevel]) {
                         enhancementLevel++;
+                        successes++;
                         std::cout << "강화 성공!\n";
                     }
                     else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
                         enhancementLevel = 0;
+                        failures++;
                         std::cout << "장비가 파괴되었습니다!\n";
                         break;
                     }
                     else {
                         enhancementLevel--;
+                        failures++;
                         std::cout << "강화 실패!\n";
 
                         if (enhancementLevel < 0) {
@@ -102,10 +129,15 @@ int main() {
                 }
 
                 if (enhancementLevel >= MAX_ENHANCEMENT_LEVEL) {
+                    maxEnhancements++;
                     std::cout << "최대 강화 레벨에 도달했습니다!\n";
                     break;
                 }
             }
+
+            // Save game data to CSV file
+            saveGameData(successes + failures, successes, failures, maxEnhancements);
+
             break;
         case 2:
             showGameDescription();
