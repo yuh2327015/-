@@ -29,11 +29,11 @@ void showGameDescription() {
 }
 
 void saveGameData(int enhancements, int successes, int failures, int maxEnhancements) {
-    std::ofstream file("game_data.csv", std::ios::out | std::ios::app);
+    std::ofstream file("DATA/game_data.csv", std::ios::out | std::ios::app);
     if (file.is_open()) {
         // 파일이 비어있는 경우에만 헤더를 추가
         if (file.tellp() == 0) {
-            file << "강화 횟수,성공 횟수,실패 횟수,최대 강화 횟수\n";
+            file << "강화 횟수,성공 횟수,실패 횟수\n";
         }
         // 각 데이터를 쉼표로 구분하여 한 행에 저장
         file << enhancements << "," << successes << "," << failures << "\n";
