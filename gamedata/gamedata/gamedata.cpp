@@ -3,6 +3,9 @@
 #include <ctime>
 #include <Windows.h>
 
+// UI 색상 입히기  ex ) 성공 -> 초록색 실패 -> 빨강색
+// 로그 추가하기
+
 #define MAX_ENHANCEMENT_LEVEL 10
 
 void showMainMenu() {
