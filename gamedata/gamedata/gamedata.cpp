@@ -47,7 +47,7 @@ int main() {
                 std::cout << "-----------------------------------------\n";
                 std::cout << "현재 강화 레벨: " << enhancementLevel << "\n";
                 std::cout << "성공 확률: " << successChance[enhancementLevel] << "%\n";
-                std::cout << "실패 확률: " << 100 - successChance[enhancementLevel] << "%\n";
+                std::cout << "실패 확률: " << 100 - destructionChance[enhancementLevel] - successChance[enhancementLevel] << "%\n";
                 std::cout << "파괴 확률: " << destructionChance[enhancementLevel] << "%\n";
                 std::cout << "강화하시겠습니까? (Enter 키로 강화):\n";
                 std::cout << "-----------------------------------------\n";
