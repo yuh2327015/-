@@ -5,7 +5,9 @@
 #include <Windows.h>
 
 // UI 색상 입히기  ex ) 성공 -> 초록색 실패 -> 빨강색
-// 로그 추가하기
+// 로그 추가하기 
+// 0411 UV 추가 날짜 정확하게 나오기  RU 신규 유저수 MUV MTS
+// 유저관련 지표 https://m.post.naver.com/viewer/postView.naver?volumeNo=28067435&memberNo=2647347
 
 #define MAX_ENHANCEMENT_LEVEL 10
 
