@@ -138,7 +138,7 @@ int main() {
             }
 
             // Save game data to CSV file
-            saveGameData(successes + failures, successes, failures, maxEnhancements);
+            saveGameData(successes + failures, successes, failures);
 
             break;
         case 2:
