@@ -4,12 +4,18 @@
 #include <ctime>
 #include <Windows.h>
 
-// UI 색상 입히기  ex ) 성공 -> 초록색 실패 -> 빨강색
-// 로그 추가하기 
+#define COLOR_GREEN 10
+#define COLOR_RED 12
+#define COLOR_GREY 7
+
 // 0411 UV 추가 날짜 정확하게 나오기  RU 신규 유저수 MUV MTS
 // 유저관련 지표 https://m.post.naver.com/viewer/postView.naver?volumeNo=28067435&memberNo=2647347
 
 #define MAX_ENHANCEMENT_LEVEL 10
+
+void setColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
 
 void showMainMenu() {
     std::cout << "------------\n";
@@ -72,10 +78,10 @@ int main() {
             while (true) {
                 std::cout << "-----------------------------------------\n";
                 std::cout << "현재 강화 레벨: " << enhancementLevel << "\n";
-                std::cout << "성공 확률: " << successChance[enhancementLevel] << "%\n";
+                std::cout << "성공 확률 : " << successChance[enhancementLevel] << " % \n";
                 std::cout << "실패 확률: " << 100 - destructionChance[enhancementLevel] - successChance[enhancementLevel] << "%\n";
                 std::cout << "파괴 확률: " << destructionChance[enhancementLevel] << "%\n";
-                std::cout << "강화하시겠습니까? (Enter 키로 강화):\n";
+                std::cout << "강화하시겠습니까? (Enter 키로 강화) \n";
                 std::cout << "-----------------------------------------\n";
 
                 if (once)
@@ -93,38 +99,46 @@ int main() {
                     if (result < successChance[enhancementLevel]) {
                         enhancementLevel++;
                         successes++;
-                        std::cout << "강화 성공!\n";
+                        setColor(COLOR_GREEN);
+                        std::cout << "\n강화 성공!\n";
+                        setColor(COLOR_GREY);
                     }
                     else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
                         enhancementLevel = 0;
                         failures++;
-                        std::cout << "장비가 파괴되었습니다!\n";
+                        std::cout << "\n장비가 파괴되었습니다!\n";
                         break;
                     }
                     else {
                         failures++;
-                        std::cout << "강화 실패!\n";
+                        setColor(COLOR_RED);
+                        std::cout << "\n강화 실패!\n";
+                        setColor(COLOR_GREY);
                     }
                 }
                 else {
                     if (result < successChance[enhancementLevel]) {
                         enhancementLevel++;
                         successes++;
-                        std::cout << "강화 성공!\n";
+                        setColor(COLOR_GREEN);
+                        std::cout << "\n강화 성공!\n";
+                        setColor(COLOR_GREY);
                     }
                     else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
                         enhancementLevel = 0;
                         failures++;
-                        std::cout << "장비가 파괴되었습니다!\n";
+                        std::cout << "\n장비가 파괴되었습니다!\n";
                         break;
                     }
                     else {
                         enhancementLevel--;
                         failures++;
-                        std::cout << "강화 실패!\n";
+                        setColor(COLOR_RED);
+                        std::cout << "\n강화 실패!\n";
+                        setColor(COLOR_GREY);
 
                         if (enhancementLevel < 0) {
-                            std::cout << "장비가 파괴되었습니다!\n";
+                            std::cout << "\n장비가 파괴되었습니다!\n";
                             break;
                         }
                     }
@@ -132,13 +146,13 @@ int main() {
 
                 if (enhancementLevel >= MAX_ENHANCEMENT_LEVEL) {
                     maxEnhancements++;
-                    std::cout << "최대 강화 레벨에 도달했습니다!\n";
+                    std::cout << "\n최대 강화 레벨에 도달했습니다!\n";
                     break;
                 }
             }
 
             // Save game data to CSV file
-            saveGameData(successes + failures, successes, failures);
+            saveGameData(successes + failures, successes, failures, enhancementLevel);
 
             break;
         case 2:
