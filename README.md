@@ -10,6 +10,8 @@
 |8강|10%|75%|15%|
 |9강|5%|75%|20%|
 |10강|2%|68%|30%|
+# 구글 시트 
+(https://docs.google.com/spreadsheets/d/1th-qOt1LpQEX_nRaVuiR65eXtar6vZ8fQ2_jqIBuqx4/edit?usp=sharing)
 # 최대강화
 ![머임 성공함](https://github.com/yuh2327015/gamedata/assets/127164406/7f9590b9-6b21-4c76-80fe-f764249def35)
 # 03/28 게임데이터분석
