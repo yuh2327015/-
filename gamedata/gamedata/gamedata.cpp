@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 #include <Windows.h>
 
 #define COLOR_GREEN 10
@@ -59,9 +60,15 @@ int main() {
     int enhancementLevel = 0;
     int successes = 0;
     int failures = 0;
+    int upgradetry = 1; // 구글 시트에 강화 횟수 더해주는 변수
     int maxEnhancements = 0;
     int csvEnhancements = 0;
 
+    // 구글 시트 Apps Scripts url
+    std::string url = "https://script.google.com/macros/s/AKfycbwcZtJomdqP7A4iDwyOpD4PuQVS5oKzF2mHw5n7jbwbJGKFHG1u95QbVR-EpkWR7oXR/exec";
+    // 커맨드로 보낼 데이터 입력
+    std::string data;
+    std::string command;
     int successChance[] = { 95, 85, 75, 60, 50, 35, 20, 10, 5, 2 };
     int destructionChance[] = { 0, 0, 0, 0, 1, 5, 10, 15, 20, 30 };
 
@@ -77,6 +84,9 @@ int main() {
         switch (choice) {
         case 1:
             while (true) {
+                successes = 0;
+                failures = 0;
+
                 std::cout << "-----------------------------------------\n";
                 std::cout << "현재 강화 레벨: " << enhancementLevel << "\n";
                 std::cout << "성공 확률 : " << successChance[enhancementLevel] << " % \n";
@@ -100,19 +110,19 @@ int main() {
                     if (result < successChance[enhancementLevel]) {
                         enhancementLevel++;
                         csvEnhancements++;
-                        successes++;
+                        ++successes;
                         setColor(COLOR_GREEN);
                         std::cout << "\n강화 성공!\n";
                         setColor(COLOR_GREY);
                     }
                     else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
                         enhancementLevel = 0;
-                        failures++;
+                        ++failures;
                         std::cout << "\n장비가 파괴되었습니다!\n";
                         break;
                     }
                     else {
-                        failures++;
+                        ++failures;
                         setColor(COLOR_RED);
                         std::cout << "\n강화 실패!\n";
                         setColor(COLOR_GREY);
@@ -122,21 +132,21 @@ int main() {
                     if (result < successChance[enhancementLevel]) {
                         enhancementLevel++;
                         csvEnhancements++;
-                        successes++;
+                        ++successes;
                         setColor(COLOR_GREEN);
                         std::cout << "\n강화 성공!\n";
                         setColor(COLOR_GREY);
                     }
                     else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
                         enhancementLevel = 0;
-                        failures++;
+                        ++failures;
                         std::cout << "\n장비가 파괴되었습니다!\n";
                         break;
                     }
                     else {
                         enhancementLevel--;
                         csvEnhancements--;
-                        failures++;
+                        ++failures;
                         setColor(COLOR_RED);
                         std::cout << "\n강화 실패!\n";
                         setColor(COLOR_GREY);
@@ -147,6 +157,12 @@ int main() {
                         }
                     }
                 }
+
+                data = "upgradetry=" + std::to_string(upgradetry) + "&success=" + std::to_string(successes) + "&fail=" + std::to_string(failures);
+                command = "curl -X POST -d \"" + data + "\" \"" + url + "\"";
+                // 보내고 이전내용 화면에서 지우기
+                system(command.c_str());
+                system("cls");
 
                 if (enhancementLevel >= MAX_ENHANCEMENT_LEVEL) {
                     maxEnhancements++;
