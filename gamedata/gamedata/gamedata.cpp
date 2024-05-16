@@ -98,7 +98,7 @@ int main() {
                 std::cout << "-----------------------------------------\n";
                 std::cout << "현재 무기 : " << weaponname[enhancementLevel] << std::endl;
                 // std::cout << "현재 강화 레벨: " << enhancementLevel << "\n";
-                std::cout << "성공 확률 : " << successChance[enhancementLevel] << " % \n";
+                std::cout << "성공 확률 : " << successChance[enhancementLevel] << "% \n";
                 if(enhancementLevel > 4)
                     std::cout << "실패(하락) 확률: " << 100 - destructionChance[enhancementLevel] - successChance[enhancementLevel] << "%\n";
                 else std::cout << "실패 확률: " << 100 - destructionChance[enhancementLevel] - successChance[enhancementLevel] << "%\n";
