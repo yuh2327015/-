@@ -24,12 +24,12 @@ void setColor(int color) {
 }
 
 void showMainMenu() {
-    std::cout << "------------\n";
-    std::cout << "메인 화면\n\n";
-    std::cout << "1. 게임 시작\n";
-    std::cout << "2. 게임 설명\n";
-    std::cout << "3. 게임 종료\n";
-    std::cout << "------------\n";
+    std::cout << "┌────────────┐\n";
+    std::cout << "│  메인 화면 │\n";
+    std::cout << "│1. 게임 시작│\n";
+    std::cout << "│2. 게임 설명│\n";
+    std::cout << "│3. 게임 종료│\n";
+    std::cout << "└────────────┘\n";
 }
 
 void showGameDescription() {
