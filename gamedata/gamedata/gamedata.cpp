@@ -44,22 +44,6 @@ void showGameDescription() {
     std::cout << "-------------------------------------------------------------------------------\n";
 }
 
-void saveGameData(int enhancements, int successes, int failures, int csvEnhancements) {
-    std::ofstream file("DATA/game_data.csv", std::ios::out | std::ios::app);
-    if (file.is_open()) {
-        // 파일이 비어있는 경우에만 헤더를 추가
-        if (file.tellp() == 0) {
-            file << "강화 횟수,성공 횟수,실패 횟수,강화 레벨\n";
-        }
-        // 각 데이터를 쉼표로 구분하여 한 행에 저장
-        file << enhancements << "," << successes << "," << failures <<","<< csvEnhancements << "\n";
-        file.close();
-    }
-    else {
-        std::cerr << "Unable to open file for saving game data.\n";
-    }
-}
-
 int main() {
     std::srand(std::time(nullptr));
 
@@ -68,7 +52,6 @@ int main() {
     int failures = 0;
     int upgradetry = 1; // 구글 시트에 강화 횟수 더해주는 변수
     int maxEnhancements = 0;
-    int csvEnhancements = 0;
     int activeNum = 1; // 구글 시트 Apps Scripts 함수 제어 변수
     bool gameon = true; // while 문 통제 변수
     std::string select;
@@ -147,7 +130,7 @@ int main() {
                     if (enhancementLevel < 5) {
                         if (result < successChance[enhancementLevel]) {
                             enhancementLevel++;
-                            csvEnhancements++;
+                           
                             ++successes;
                             setColor(COLOR_GREEN);
                             std::cout << "\n강화 성공!\n";
@@ -169,7 +152,6 @@ int main() {
                     else {
                         if (result < successChance[enhancementLevel]) {
                             enhancementLevel++;
-                            csvEnhancements++;
                             ++successes;
                             setColor(COLOR_GREEN);
                             std::cout << "\n강화 성공!\n";
@@ -183,7 +165,6 @@ int main() {
                         }
                         else {
                             enhancementLevel--;
-                            csvEnhancements--;
                             ++failures;
                             setColor(COLOR_RED);
                             std::cout << "\n강화 실패!\n";
@@ -231,9 +212,6 @@ int main() {
                 }
                 else std::cout << "(Y/N) 중 하나만 입력하고 엔터를 눌러주세요." << std::endl;
             }
-
-            // Save game data to CSV file
-            saveGameData(successes + failures, successes, failures, csvEnhancements);
 
             break;
         case 2:
