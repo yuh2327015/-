@@ -12,6 +12,8 @@
 |10강|2%|68%|30%|
 # 구글 시트 
 (https://docs.google.com/spreadsheets/d/1th-qOt1LpQEX_nRaVuiR65eXtar6vZ8fQ2_jqIBuqx4/edit?usp=sharing)
+# 정식 출시 사이트
+(https://cafe.naver.com/smartopt/4551)
 # 최대강화
 ![머임 성공함](https://github.com/yuh2327015/gamedata/assets/127164406/7f9590b9-6b21-4c76-80fe-f764249def35)
 # 03/28 게임데이터분석
@@ -41,3 +43,5 @@ string 함수를 추가하고 system 함수를 이용하여 구글 시트 Apps S
 chrono, iomanip, sstream, cstdlib 라이브러리 추가하여 구글시트에 더욱 다양한 로그가 쌓이도록 코드를 추가 및 수정함
 # 05/15 게임성 개선
 게임 시작 후 메인화면으로 나가는 것과 무기 이름, 무기 수집 기능을 추가 및 command로 구글시트에 데이터를 보낼때 나오는 출력문을 안뜨게 수정완료
+# 05/16
+게임 정식 출시 및 기존 CSV, 불필요 코드 삭제, UI 개선. 
