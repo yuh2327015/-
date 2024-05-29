@@ -71,7 +71,7 @@ int main() {
     std::string data;
     std::string command;
     int successChance[] = { 95, 85, 75, 60, 50, 35, 20, 10, 5, 2 };
-    int destructionChance[] = { 0, 0, 0, 0, 1, 5, 10, 15, 20, 30 };
+    int destructionChance[] = { 0, 0, 3, 5, 10, 17, 25, 30, 35, 40 };
     std::string weaponname[] = {"철검", "강철검", "바닷빛 검", "강철 클레이모어", "티타늄 검", "장엄한 수호", "그랜드 가디언", "별의 진노", "갤럭투스 블레이드", "대지"};
     std::string weaponcollection[] = { "???", "???", "???", "???", "???", "???", "???", "???", "???", "???" };
     int choice;
@@ -123,7 +123,7 @@ int main() {
                     std::ostringstream oss2;
                     oss2 << std::put_time(ptm, "%Y.%m.%d %H시%M분%S초");
                     std::string trytime = oss2.str();
-                    Sleep(1000);
+                    Sleep(500);
 
                     int result = std::rand() % 100;
 
