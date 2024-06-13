@@ -47,3 +47,5 @@ chrono, iomanip, sstream, cstdlib 라이브러리 추가하여 구글시트에 �
 게임 정식 출시 및 기존 CSV, 불필요 코드 삭제, UI 개선. 
 # 05/29 딜레이시간, 파괴확률 개선
 유저들의 의견에 따라 강화 중 딜레이시간 개선, 난이도 조절을 위한 파괴확률 개선
+# 06/13기준 유저 그래프
+![그래프](https://github.com/yuh2327015/gamedata/assets/127164406/da4e9ab7-0546-4cd5-a1fa-bd732de8a6a8)
