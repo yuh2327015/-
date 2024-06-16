@@ -15,16 +15,13 @@
 #define COLOR_RED 12
 #define COLOR_GREY 7
 
-// 0411 UV 추가 날짜 정확하게 나오기  RU 신규 유저수 MUV MTS
-// 유저관련 지표 https://m.post.naver.com/viewer/postView.naver?volumeNo=28067435&memberNo=2647347
-
 #define MAX_ENHANCEMENT_LEVEL 9
 
 void setColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
-void showMainMenu() 
+void showMainMenu()
 {
     std::cout << "┌────────────┐\n";
     std::cout << "│  메인 화면 │\n";
@@ -33,7 +30,6 @@ void showMainMenu()
     std::cout << "│3. 게임 종료│\n";
     std::cout << "└────────────┘\n";
 }
-
 
 void showGameDescription() {
     system("cls");
@@ -77,7 +73,7 @@ int main() {
     int successChance[] = { 95, 90, 88, 85, 78, 72, 65, 60, 55, 50 };
     int destructionChance[] = { 0, 0, 3, 5, 7, 9, 12, 15, 17, 20 };
     int failChance[] = { 0, 0, 3, 5, 7, 9, 12, 15, 17, 20 };
-    std::string weaponname[] = {"철검", "강철검", "바닷빛 검", "강철 클레이모어", "티타늄 검", "장엄한 수호", "그랜드 가디언", "별의 진노", "갤럭투스 블레이드", "대지"};
+    std::string weaponname[] = { "철검", "강철검", "바닷빛 검", "강철 클레이모어", "티타늄 검", "장엄한 수호", "그랜드 가디언", "별의 진노", "갤럭투스 블레이드", "대지" };
     std::string weaponcollection[] = { "???", "???", "???", "???", "???", "???", "???", "???", "???", "???" };
     int choice;
     bool once; // 버퍼를 첫 1회 및 장비 파괴 후 다시 시작할때만 지우기 위해 만든 변수
@@ -103,11 +99,8 @@ int main() {
 
                 std::cout << "-----------------------------------------\n";
                 std::cout << "현재 무기 : " << weaponname[enhancementLevel] << std::endl;
-                // std::cout << "현재 강화 레벨: " << enhancementLevel << "\n";
                 std::cout << "성공 확률 : " << successChance[enhancementLevel] << "% \n";
-                if(enhancementLevel > 4)
-                    std::cout << "실패 확률: " << 100 - destructionChance[enhancementLevel] - successChance[enhancementLevel] << "%\n";
-                else std::cout << "실패 확률: " << 100 - destructionChance[enhancementLevel] - successChance[enhancementLevel] << "%\n";
+                std::cout << "실패 확률: " << failChance[enhancementLevel] << "%\n";
                 std::cout << "파괴 확률: " << destructionChance[enhancementLevel] << "%\n";
                 std::cout << "강화하기 (Y/N) / 수집하기 (C) / 수집목록 보기 (L)\n";
                 std::cout << "-----------------------------------------\n";
@@ -134,54 +127,24 @@ int main() {
 
                     int result = std::rand() % 100;
 
-                    if (enhancementLevel < 5) {
-                        if (result < successChance[enhancementLevel]) {
-                            enhancementLevel++;
-                           
-                            ++successes;
-                            setColor(COLOR_GREEN);
-                            std::cout << "\n강화 성공!\n";
-                            setColor(COLOR_GREY);
-                        }
-                        else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
-                            enhancementLevel = 0;
-                            ++failures;
-                            std::cout << "\n장비가 파괴되었습니다!\n";
-                            break;
-                        }
-                        else {
-                            ++failures;
-                            setColor(COLOR_RED);
-                            std::cout << "\n강화 실패!\n";
-                            setColor(COLOR_GREY);
-                        }
+                    if (result < successChance[enhancementLevel]) {
+                        enhancementLevel++;
+                        ++successes;
+                        setColor(COLOR_GREEN);
+                        std::cout << "\n강화 성공!\n";
+                        setColor(COLOR_GREY);
+                    }
+                    else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
+                        enhancementLevel = 0;
+                        ++failures;
+                        std::cout << "\n장비가 파괴되었습니다!\n";
+                        break;
                     }
                     else {
-                        if (result < successChance[enhancementLevel]) {
-                            enhancementLevel++;
-                            ++successes;
-                            setColor(COLOR_GREEN);
-                            std::cout << "\n강화 성공!\n";
-                            setColor(COLOR_GREY);
-                        }
-                        else if (result >= successChance[enhancementLevel] && result < successChance[enhancementLevel] + destructionChance[enhancementLevel]) {
-                            enhancementLevel = 0;
-                            ++failures;
-                            std::cout << "\n장비가 파괴되었습니다!\n";
-                            break;
-                        }
-                        else {
-                            enhancementLevel--;
-                            ++failures;
-                            setColor(COLOR_RED);
-                            std::cout << "\n강화 실패!\n";
-                            setColor(COLOR_GREY);
-
-                            if (enhancementLevel < 0) {
-                                std::cout << "\n장비가 파괴되었습니다!\n";
-                                break;
-                            }
-                        }
+                        ++failures;
+                        setColor(COLOR_RED);
+                        std::cout << "\n강화 실패!\n";
+                        setColor(COLOR_GREY);
                     }
 
                     // 커맨드로 보낼 데이터 입력
@@ -249,7 +212,7 @@ int main() {
             Sleep(1500);
             system("cls");
             break;
-        }   
+        }
     }
 
     now = std::chrono::system_clock::now();
