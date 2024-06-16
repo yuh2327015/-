@@ -49,3 +49,5 @@ chrono, iomanip, sstream, cstdlib 라이브러리 추가하여 구글시트에 �
 유저들의 의견에 따라 강화 중 딜레이시간 개선, 난이도 조절을 위한 파괴확률 개선
 # 06/13기준 유저 그래프
 ![그래프](https://github.com/yuh2327015/gamedata/assets/127164406/da4e9ab7-0546-4cd5-a1fa-bd732de8a6a8)
+# 06/16 확률 대폭 수정
+강화, 실패, 파괴확률 대폭 수정
