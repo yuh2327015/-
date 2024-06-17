@@ -72,7 +72,7 @@ int main() {
     std::string command;
     int successChance[] = { 95, 90, 88, 85, 78, 72, 65, 60, 55, 50 };
     int destructionChance[] = { 0, 0, 3, 5, 7, 9, 12, 15, 17, 20 };
-    int failChance[] = { 0, 0, 3, 5, 7, 9, 12, 15, 17, 20 };
+    int failChance[] = { 5, 10, 12, 15, 22, 28, 35, 40, 45, 50 };
     std::string weaponname[] = { "철검", "강철검", "바닷빛 검", "강철 클레이모어", "티타늄 검", "장엄한 수호", "그랜드 가디언", "별의 진노", "갤럭투스 블레이드", "대지" };
     std::string weaponcollection[] = { "???", "???", "???", "???", "???", "???", "???", "???", "???", "???" };
     int choice;
